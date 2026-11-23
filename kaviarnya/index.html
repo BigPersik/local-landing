@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тиха — демонстраційний сайт кав’ярні</title>
+  <meta name="description" content="Демонстраційний лендінг кав’ярні Тиха: меню, ранкове вікно і форма столика. Зразок для портфоліо.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,650&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <a class="skip" href="#stolik">До столика</a>
+  <header class="top">
+    <a class="brand" href="#top">Тиха<small>Чернівці</small></a>
+    <nav class="nav" id="nav">
+      <a href="#kava">Кава</a>
+      <a href="#ranok">Ранок</a>
+      <a href="#menu">Меню</a>
+      <a href="#stolik">Столик</a>
+    </nav>
+    <a class="book-link" href="#stolik">Зайняти столик</a>
+    <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-photo" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="kicker">Демонстраційний зразок · не діюча кав’ярня</p>
+        <h1>Кава, поки вона ще гаряча.</h1>
+        <p class="lead">Маленька зала на вісім столів. Фільтр зранку, еспресо весь день, випічка поки не закінчилась.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#stolik">Зайняти столик</a>
+          <a class="btn btn-line" href="#menu">Подивитися меню</a>
+        </div>
+      </div>
+      <aside class="card">
+        <p class="card-k">Сьогодні на барі</p>
+        <p class="card-t">Фільтр Ефіопія</p>
+        <p class="card-p"><b>75</b><span>грн</span></p>
+        <p class="card-note">Цифри на цій сторінці вигадані для зразка.</p>
+      </aside>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Еспресо</span><span>Фільтр</span><span>Капучино</span><span>Флет вайт</span><span>Какао</span><span>Сирник</span>
+        <span>Еспресо</span><span>Фільтр</span><span>Капучино</span><span>Флет вайт</span><span>Какао</span><span>Сирник</span>
+      </div>
+    </div>
+
+    <section id="kava" class="split reveal">
+      <figure>
+        <img src="../assets/cafe-cup.jpg" alt="Капучино в керамічній чашці на дерев’яному столі">
+        <figcaption>Чашка для зразка. На живому сайті тут були б ваші напої.</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">01 — Зала</p>
+        <h2>Вісім столів і бариста, який не поспішає з вашою чашкою.</h2>
+        <ul class="points">
+          <li>Фільтр варимо зранку, поки не закінчиться колба.</li>
+          <li>Молоко звичайне й рослинне. Солодке збоку, не в чашці.</li>
+          <li>З собою віддаємо в паперовому стакані, в залі — у кераміці.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="ranok" class="hours reveal">
+      <p class="eyebrow">02 — Ранок</p>
+      <ol>
+        <li><span>08:00</span><h3>Відчиняємось</h3><p>Перша колба фільтра і тиша, поки зала ще порожня.</p></li>
+        <li><span>11:00</span><h3>Найлегше сісти</h3><p>Між ранковою чергою і обідом стіл майже завжди є.</p></li>
+        <li><span>19:00</span><h3>Остання кава</h3><p>Кухня закривається раніше, бар допиває те, що лишилось.</p></li>
+      </ol>
+    </section>
+
+    <section id="menu" class="menu-list reveal">
+      <div>
+        <p class="eyebrow">03 — Макет меню</p>
+        <h2>Коротко. Без сторінки на двадцять позицій.</h2>
+      </div>
+      <ul>
+        <li><span>Еспресо</span><b>45 грн</b></li>
+        <li><span>Фільтр</span><b>75 грн</b></li>
+        <li><span>Капучино</span><b>85 грн</b></li>
+        <li><span>Флет вайт</span><b>90 грн</b></li>
+        <li><span>Какао</span><b>80 грн</b></li>
+        <li><span>Сирник</span><b>95 грн</b></li>
+      </ul>
+    </section>
+
+    <section id="stolik" class="book reveal">
+      <div>
+        <p class="eyebrow light">04 — Столик</p>
+        <h2>Напишіть, на котру.</h2>
+        <p>Форма нікуди не відправляє дані. На сайті кав’ярні заявка йшла б у Telegram.</p>
+      </div>
+      <form id="form" novalidate>
+        <label>Ім’я<input name="name" autocomplete="name" required maxlength="80"></label>
+        <label>Телефон<input name="phone" type="tel" autocomplete="tel" required placeholder="+380"></label>
+        <label>Година<input name="time" type="time" required value="11:00"></label>
+        <label>Гостей
+          <select name="guests" required>
+            <option>1</option>
+            <option selected>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </label>
+        <label class="full">Коментар<textarea name="note" rows="3" maxlength="300" placeholder="Біля вікна, без молока, з собою"></textarea></label>
+        <button class="btn" type="submit">Показати заявку</button>
+        <p class="form-status" role="status" hidden></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Тиха</strong> — демонстраційний зразок для портфоліо. Кав’ярні з такою назвою немає, столиків не бронює.</p>
+    <p>Вул. Кавова, 7 · Чернівці · вигадана адреса</p>
+    <p><a href="../">Інший зразок: автосервіс «Цех 48»</a></p>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

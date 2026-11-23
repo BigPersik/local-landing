@@ -271,6 +271,7 @@ form.invalid input:invalid, form.invalid select:invalid { outline: 2px solid #9a
 
 footer { padding: 8px 5vw 40px; color: var(--muted); }
 footer p { margin: 0 0 8px; max-width: 62ch; }
+footer a { color: var(--hot); }
 
 @keyframes drift { to { transform: scale(1); } }
 @keyframes run { to { transform: translateX(-50%); } }

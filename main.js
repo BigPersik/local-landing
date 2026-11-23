@@ -3,8 +3,6 @@ const nav = document.querySelector("#nav");
 const form = document.querySelector("#form");
 const status = document.querySelector(".form-status");
 const bar = document.querySelector(".progress");
-const glow = document.querySelector(".glow");
-const ghost = document.querySelector(".ghost");
 const services = [...document.querySelectorAll(".svc")];
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -37,33 +35,24 @@ if (!reduce) {
     if (services.some((item) => item.matches(":hover"))) return;
     cursor = (cursor + 1) % services.length;
     show(cursor);
-  }, 2600);
+  }, 2800);
 
   const counters = [...document.querySelectorAll("[data-count]")];
-  const paint = (el, value) => { el.textContent = String(Math.round(value)); };
-  const startCount = () => {
-    const begun = performance.now();
-    const tick = (now) => {
-      const t = Math.min(1, (now - begun) / 1100);
-      const eased = 1 - Math.pow(1 - t, 3);
-      counters.forEach((el) => paint(el, eased * Number(el.dataset.count)));
-      if (t < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+  const begun = performance.now();
+  const tick = (now) => {
+    const t = Math.min(1, (now - begun) / 1100);
+    const eased = 1 - Math.pow(1 - t, 3);
+    counters.forEach((el) => {
+      el.textContent = String(Math.round(eased * Number(el.dataset.count)));
+    });
+    if (t < 1) requestAnimationFrame(tick);
   };
-  startCount();
+  requestAnimationFrame(tick);
 
   window.addEventListener("scroll", () => {
     const max = document.documentElement.scrollHeight - innerHeight;
     bar.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
   }, { passive: true });
-
-  window.addEventListener("pointermove", (event) => {
-    glow.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-    const x = (event.clientX / innerWidth - 0.5) * 24;
-    const y = (event.clientY / innerHeight - 0.5) * 16;
-    ghost.style.transform = `translate(${x}px, ${y}px)`;
-  });
 }
 
 form.addEventListener("submit", (event) => {
@@ -74,7 +63,6 @@ form.addEventListener("submit", (event) => {
   }
   form.classList.remove("invalid");
   status.hidden = false;
-  status.classList.add("stamped");
   status.textContent = "Так виглядає підтвердження. Дані нікуди не надіслані: це демонстраційна форма.";
   form.reset();
 });

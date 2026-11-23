@@ -7,12 +7,11 @@
   <meta name="description" content="Демонстраційний лендінг автосервісу Цех 48: послуги, ціни до початку роботи і форма запису. Зразок для портфоліо.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
-  <div class="glow" aria-hidden="true"></div>
   <a class="skip" href="#zapis">До запису</a>
 
   <header class="top">
@@ -32,21 +31,17 @@
 
   <main id="top">
     <section class="hero">
-      <p class="ghost" aria-hidden="true">48</p>
-      <p class="kicker"><span class="live"></span> Замовлення-наряд 048 · демонстраційний зразок</p>
-      <h1>
-        <span>Називаємо</span>
-        <span class="hot">ціну</span>
-        <span>до зняття колеса.</span>
-      </h1>
-      <div class="hero-row">
+      <div class="hero-photo" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="kicker"><span class="live"></span> Замовлення-наряд 048 · демонстраційний зразок</p>
+        <h1>Називаємо ціну до зняття колеса.</h1>
         <p class="lead">Ходова, гальма, масла й електрика. Одна справа на одне вікно. Жодного «підженіть зранку і почекайте у дворі».</p>
         <div class="hero-actions">
           <a class="btn" href="#zapis">Записатися на годину</a>
           <a class="btn btn-line" href="#ciny">Ціни на макеті</a>
         </div>
       </div>
-
       <aside class="ticket">
         <p class="ticket-k">Вільне вікно</p>
         <p class="ticket-t">Огляд ходової</p>
@@ -54,13 +49,6 @@
         <p class="ticket-p"><b data-count="400">0</b><span>гривень</span></p>
         <p class="ticket-time">Сьогодні · 16:20</p>
       </aside>
-
-      <svg class="car" viewBox="0 0 760 160" aria-hidden="true">
-        <path d="M40 112h70l28-40c18-26 48-36 86-36h150c40 0 62 12 86 36l36 40h170c28 0 46 14 46 36v8H40v-8c0-20 0-36 0-36z"/>
-        <circle cx="190" cy="124" r="22"/>
-        <circle cx="560" cy="124" r="22"/>
-        <path d="M150 76h120"/>
-      </svg>
     </section>
 
     <div class="marquee" aria-hidden="true">
@@ -71,41 +59,45 @@
     </div>
 
     <section id="poslugy" class="stage">
-      <div class="stage-copy">
+      <figure class="stage-photo">
+        <img src="assets/brake-detail.jpg" alt="Гальмівний диск крупним планом, світло майстерні">
+        <figcaption>Диск до заміни. На живому сайті тут було б фото з вашого поста.</figcaption>
+      </figure>
+      <div>
         <p class="eyebrow">01 — Пост</p>
-        <h2>Шість робіт. Жодної кузовщини і жодного «двигуна під ключ».</h2>
-      </div>
-      <div class="stage-list" role="list">
-        <button class="svc is-on" type="button" role="listitem">
-          <span>01</span>
-          <strong>Ходова</strong>
-          <em>Стуки, люфти, амортизатори. Спочатку огляд, потім список деталей.</em>
-        </button>
-        <button class="svc" type="button" role="listitem">
-          <span>02</span>
-          <strong>Гальма</strong>
-          <em>Колодки, диски, рідина. Перед заміною показуємо, що саме зношене.</em>
-        </button>
-        <button class="svc" type="button" role="listitem">
-          <span>03</span>
-          <strong>Масло</strong>
-          <em>Двигун, повітря, салон. Своє масло або з полиці майстерні.</em>
-        </button>
-        <button class="svc" type="button" role="listitem">
-          <span>04</span>
-          <strong>Електрика</strong>
-          <em>Акумулятор, генератор, лампи. Без «поїздіть ще тиждень».</em>
-        </button>
-        <button class="svc" type="button" role="listitem">
-          <span>05</span>
-          <strong>Шини</strong>
-          <em>Сезон, баланс, прокол. Окрема черга, не слюсарний пост.</em>
-        </button>
-        <button class="svc" type="button" role="listitem">
-          <span>06</span>
-          <strong>Діагностика</strong>
-          <em>Помилки людською мовою, не роздрук на три сторінки.</em>
-        </button>
+        <h2>Шість робіт. Жодної кузовщини.</h2>
+        <div class="stage-list">
+          <button class="svc is-on" type="button">
+            <span>01</span>
+            <strong>Ходова</strong>
+            <em>Стуки, люфти, амортизатори. Спочатку огляд, потім список деталей.</em>
+          </button>
+          <button class="svc" type="button">
+            <span>02</span>
+            <strong>Гальма</strong>
+            <em>Колодки, диски, рідина. Перед заміною показуємо, що саме зношене.</em>
+          </button>
+          <button class="svc" type="button">
+            <span>03</span>
+            <strong>Масло</strong>
+            <em>Двигун, повітря, салон. Своє масло або з полиці майстерні.</em>
+          </button>
+          <button class="svc" type="button">
+            <span>04</span>
+            <strong>Електрика</strong>
+            <em>Акумулятор, генератор, лампи. Без «поїздіть ще тиждень».</em>
+          </button>
+          <button class="svc" type="button">
+            <span>05</span>
+            <strong>Шини</strong>
+            <em>Сезон, баланс, прокол. Окрема черга, не слюсарний пост.</em>
+          </button>
+          <button class="svc" type="button">
+            <span>06</span>
+            <strong>Діагностика</strong>
+            <em>Помилки людською мовою, не роздрук на три сторінки.</em>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -133,7 +125,8 @@
     <section id="ciny" class="prices">
       <div class="prices-head">
         <p class="eyebrow">03 — Макет цін</p>
-        <h2>Робота без деталей. На живому сайті тут стояли б суми майстерні.</h2>
+        <h2>Робота без деталей.</h2>
+        <p>На живому сайті тут стояли б суми майстерні.</p>
       </div>
       <ul>
         <li><span>Огляд ходової</span><b>400 грн</b><i>40 хв</i></li>
@@ -145,10 +138,10 @@
     </section>
 
     <section id="zapis" class="book">
-      <div>
-        <p class="eyebrow light">04 — Запис</p>
+      <div class="book-copy">
+        <p class="eyebrow">04 — Запис</p>
         <h2>Година, не черга у дворі.</h2>
-        <p class="book-note">Форма нікуди не відправляє дані. На сайті клієнта заявка йде в Telegram або на пошту.</p>
+        <p>Форма нікуди не відправляє дані. На сайті клієнта заявка йде в Telegram або на пошту.</p>
       </div>
       <form id="form" novalidate>
         <label>Ім’я<input name="name" autocomplete="name" required maxlength="80"></label>

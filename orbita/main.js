@@ -9,7 +9,8 @@ const seatField = document.querySelector("#seat-field");
 const reel = document.querySelector("#reel");
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const taken = new Set([2, 5, 8, 14, 19, 27, 33, 36, 44, 51, 58, 61]);
+const rows = [5, 6, 7, 8, 9, 9, 10, 10];
+const taken = new Set(["1-3", "2-1", "2-6", "3-4", "4-2", "4-7", "5-5", "6-1", "6-8", "7-4", "7-9", "8-3", "8-6", "8-10"]);
 
 menu.addEventListener("click", () => {
   const open = nav.classList.toggle("open");
@@ -55,27 +56,30 @@ document.querySelectorAll(".sky-switch button").forEach((button) => {
   });
 });
 
-for (let index = 0; index < 64; index += 1) {
-  const button = document.createElement("button");
-  const row = Math.floor(index / 8) + 1;
-  const place = (index % 8) + 1;
-  const name = `Ряд ${row}, місце ${place}`;
-  button.type = "button";
-  button.className = "seat";
-  button.setAttribute("aria-label", name);
-  if (taken.has(index)) {
-    button.disabled = true;
-    button.setAttribute("aria-label", `${name}, зайняте`);
-  } else {
-    button.addEventListener("click", () => {
-      dome.querySelectorAll(".seat.is-on").forEach((seat) => seat.classList.remove("is-on"));
-      button.classList.add("is-on");
-      seatLabel.textContent = name;
-      seatField.value = name;
-    });
+rows.forEach((count, rowIndex) => {
+  const row = document.createElement("div");
+  row.className = "row";
+  for (let place = 1; place <= count; place += 1) {
+    const button = document.createElement("button");
+    const name = `Ряд ${rowIndex + 1}, місце ${place}`;
+    button.type = "button";
+    button.className = "seat";
+    button.setAttribute("aria-label", name);
+    if (taken.has(`${rowIndex + 1}-${place}`)) {
+      button.disabled = true;
+      button.setAttribute("aria-label", `${name}, зайняте`);
+    } else {
+      button.addEventListener("click", () => {
+        dome.querySelectorAll(".seat.is-on").forEach((seat) => seat.classList.remove("is-on"));
+        button.classList.add("is-on");
+        seatLabel.textContent = name;
+        seatField.value = name;
+      });
+    }
+    row.appendChild(button);
   }
-  dome.appendChild(button);
-}
+  dome.appendChild(row);
+});
 
 document.querySelectorAll("[data-reel]").forEach((button) => {
   button.addEventListener("click", () => {

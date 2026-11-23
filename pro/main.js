@@ -28,6 +28,15 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
+function sizeRail() {
+  if (reduce || narrow.matches) {
+    railWrap.style.height = "";
+    return;
+  }
+  const travel = Math.max(0, rail.scrollWidth - window.innerWidth);
+  railWrap.style.height = `${window.innerHeight + travel + 80}px`;
+}
+
 function update() {
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
   bar.style.transform = `scaleX(${maxScroll > 0 ? window.scrollY / maxScroll : 0})`;
@@ -66,13 +75,22 @@ function requestTick() {
 }
 
 window.addEventListener("scroll", requestTick, { passive: true });
-window.addEventListener("resize", requestTick);
+window.addEventListener("resize", () => {
+  sizeRail();
+  requestTick();
+});
+window.addEventListener("load", () => {
+  sizeRail();
+  update();
+});
 narrow.addEventListener("change", () => {
   photo.style.clipPath = "";
   photoImg.style.transform = "";
   copy.style.opacity = "";
   copy.style.transform = "";
   rail.style.transform = "";
+  sizeRail();
   update();
 });
+sizeRail();
 update();

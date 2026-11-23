@@ -18,6 +18,34 @@ nav.addEventListener("click", (event) => {
   menu.textContent = "Меню";
 });
 
+function cycle(nodes, every) {
+  if (reduce || nodes.length < 2) return;
+  let cursor = Math.max(0, nodes.findIndex((node) => node.classList.contains("is-on")));
+  setInterval(() => {
+    if (nodes.some((node) => node.matches(":hover"))) return;
+    cursor = (cursor + 1) % nodes.length;
+    nodes.forEach((node, index) => node.classList.toggle("is-on", index === cursor));
+  }, every);
+}
+
+cycle([...document.querySelectorAll(".card-swap > p")], 2600);
+cycle([...document.querySelectorAll(".hours li")], 3200);
+cycle([...document.querySelectorAll("#drinks li")], 1800);
+
+const counters = [...document.querySelectorAll("[data-count]")];
+if (!reduce && counters.length) {
+  const begun = performance.now();
+  const tick = (now) => {
+    const t = Math.min(1, (now - begun) / 1100);
+    const eased = 1 - Math.pow(1 - t, 3);
+    counters.forEach((el) => {
+      el.textContent = String(Math.round(eased * Number(el.dataset.count)));
+    });
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
 const reveals = [...document.querySelectorAll(".reveal")];
 if (reduce || !("IntersectionObserver" in window)) {
   reveals.forEach((el) => el.classList.add("in"));

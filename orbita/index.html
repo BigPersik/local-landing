@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Орбіта — демонстраційний сайт планетарію</title>
+  <meta name="description" content="Демонстраційний лендінг планетарію Орбіта: три неба, програма сеансів і вибір місця в залі. Зразок для портфоліо.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Onest:wght@500..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-sky="lito">
+  <div class="progress" aria-hidden="true"></div>
+  <a class="skip" href="#zala">До зали</a>
+  <header class="top">
+    <a class="brand" href="#top">Орбіта<small>Київ</small></a>
+    <nav class="nav" id="nav">
+      <a href="#nebo">Небо</a>
+      <a href="#seansy">Сеанси</a>
+      <a href="#zala">Зала</a>
+    </nav>
+    <a class="book-link" href="#zala">Обрати місце</a>
+    <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="stars" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="kicker">Демонстраційний зразок · планетарію немає</p>
+        <h1>Небо на одну годину.</h1>
+        <p class="lead">Купол, крісло і сеанс на 50 хвилин. Зал на 64 місця, без черги в проході.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#zala">Обрати місце</a>
+          <a class="btn btn-line" href="#seansy">Програма вечора</a>
+        </div>
+      </div>
+      <div class="orb" aria-hidden="true">
+        <div class="ring ring-back"></div>
+        <div class="planet"></div>
+        <div class="ring ring-front"></div>
+      </div>
+    </section>
+
+    <section id="nebo" class="sky">
+      <div class="sky-copy">
+        <p class="eyebrow">01 — Небо</p>
+        <h2>Одне й те саме крісло. Три різні вечори.</h2>
+        <p>Натисніть небо — зміниться купол і перший рядок програми. Це показ, не розклад живої каси.</p>
+      </div>
+      <div class="sky-switch" role="group" aria-label="Обрати небо">
+        <button type="button" data-sky="lito" aria-pressed="true">Літо<small>тепле, низьке</small></button>
+        <button type="button" data-sky="zyma" aria-pressed="false">Зима<small>ясне, високе</small></button>
+        <button type="button" data-sky="more" aria-pressed="false">Море<small>темне, солоне</small></button>
+      </div>
+    </section>
+
+    <section id="seansy" class="shows">
+      <div class="shows-head">
+        <div>
+          <p class="eyebrow">02 — Сеанси</p>
+          <h2>Вечір з чотирьох показів.</h2>
+        </div>
+        <div class="reel-nav">
+          <button type="button" data-reel="-1" aria-label="Попередній сеанс">←</button>
+          <button type="button" data-reel="1" aria-label="Наступний сеанс">→</button>
+        </div>
+      </div>
+      <div class="reel" id="reel" tabindex="0">
+        <article id="first-show">
+          <b>01</b>
+          <p>18:00</p>
+          <h3>Місяць зблизька</h3>
+          <span>Кратери, яких із двору не видно.</span>
+        </article>
+        <article>
+          <b>02</b>
+          <p>19:30</p>
+          <h3>Кільця Сатурна</h3>
+          <span>Сорок хвилин без міського світла.</span>
+        </article>
+        <article>
+          <b>03</b>
+          <p>21:00</p>
+          <h3>Чумацький Шлях</h3>
+          <span>Як його видно далеко від Києва.</span>
+        </article>
+        <article>
+          <b>04</b>
+          <p>22:30</p>
+          <h3>Нічний атлас</h3>
+          <span>Тихий сеанс, майже без дикторського тексту.</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="zala" class="hall">
+      <div class="hall-copy">
+        <p class="eyebrow">03 — Зала</p>
+        <h2>Сідайте там, де видно весь купол.</h2>
+        <p>Світлі місця вільні. Порожні контури вже зайняті в цьому макеті. Обране місце само з’явиться в заявці.</p>
+        <dl class="pick">
+          <div><dt>Місце</dt><dd id="seat-label">ще не обране</dd></div>
+          <div><dt>Сеанс</dt><dd>50 хвилин</dd></div>
+          <div><dt>Зал</dt><dd>64 місця</dd></div>
+        </dl>
+        <ul class="legend">
+          <li><i class="swatch swatch-free"></i>вільне</li>
+          <li><i class="swatch swatch-on"></i>ваше</li>
+          <li><i class="swatch swatch-taken"></i>зайняте</li>
+        </ul>
+        <form id="form" novalidate>
+          <label>Ім’я<input name="name" autocomplete="name" required maxlength="80"></label>
+          <label>Телефон<input name="phone" type="tel" autocomplete="tel" required placeholder="+380"></label>
+          <label>Місце<input name="seat" id="seat-field" readonly required placeholder="Оберіть у залі"></label>
+          <button class="btn" type="submit">Показати заявку</button>
+          <p class="form-note">Форма нікуди не відправляє дані. Квитків вона не продає.</p>
+          <p class="form-status" role="status" hidden></p>
+        </form>
+      </div>
+      <div class="dome-wrap">
+        <p class="dome-k">Купол</p>
+        <div class="dome" id="dome" role="group" aria-label="Місця в залі"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Орбіта</strong> — вигаданий планетарій для портфоліо. Такої зали немає, квитків у продажу немає.</p>
+    <p>Пров. Зоряний, 3 · Київ · вигадана адреса</p>
+    <p><a href="../">Автосервіс «Цех 48»</a> · <a href="../kaviarnya/">Кав’ярня «Тиха»</a></p>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

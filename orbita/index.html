@@ -7,7 +7,7 @@
   <meta name="description" content="Демонстраційний лендінг планетарію Орбіта: три неба, програма сеансів і вибір місця в залі. Зразок для портфоліо.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Onest:wght@500..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-sky="lito">
@@ -27,62 +27,47 @@
   <main id="top">
     <section class="hero">
       <div class="stars" aria-hidden="true"></div>
+      <div class="orb" aria-hidden="true">
+        <canvas id="planet" width="1200" height="820"></canvas>
+        <p class="orb-caption" id="orb-caption">Сатурн · літнє небо</p>
+      </div>
       <div class="hero-copy">
         <p class="kicker">Демонстраційний зразок · планетарію немає</p>
         <h1>Небо на одну годину.</h1>
-        <p class="lead">Купол, крісло і сеанс на 50 хвилин. Зал на 64 місця, без черги в проході.</p>
+        <p class="lead">П’ятдесят хвилин під куполом. У залі 64 крісла, і місце обираєте ви самі.</p>
         <div class="hero-actions">
           <a class="btn" href="#zala">Обрати місце</a>
           <a class="btn btn-line" href="#seansy">Програма вечора</a>
         </div>
       </div>
-      <div class="orb" aria-hidden="true">
-        <svg viewBox="0 0 680 460">
-          <defs>
-            <radialGradient id="globe" cx="32%" cy="30%">
-              <stop offset="0%" stop-color="#fff" />
-              <stop offset="7%" stop-color="var(--planet-a)" />
-              <stop offset="30%" stop-color="var(--planet-b)" />
-              <stop offset="64%" stop-color="var(--planet-c)" />
-              <stop offset="100%" stop-color="var(--planet-d)" />
-            </radialGradient>
-            <linearGradient id="band" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="var(--ring)" stop-opacity="0" />
-              <stop offset="0.16" stop-color="var(--ring)" />
-              <stop offset="0.5" stop-color="var(--ring)" stop-opacity="0.4" />
-              <stop offset="0.84" stop-color="var(--ring)" />
-              <stop offset="1" stop-color="var(--ring)" stop-opacity="0" />
-            </linearGradient>
-            <clipPath id="disc"><circle cx="340" cy="206" r="118" /></clipPath>
-            <clipPath id="near"><rect x="0" y="236" width="680" height="224" /></clipPath>
-          </defs>
-          <ellipse cx="340" cy="236" rx="292" ry="52" fill="none" stroke="url(#band)" stroke-width="16" />
-          <circle cx="340" cy="206" r="118" fill="url(#globe)" />
-          <g clip-path="url(#disc)" opacity="0.28">
-            <ellipse cx="340" cy="246" rx="140" ry="18" fill="none" stroke="#1a1020" stroke-width="14" />
-            <ellipse cx="340" cy="176" rx="120" ry="14" fill="none" stroke="#fff" stroke-width="8" />
-          </g>
-          <ellipse cx="340" cy="236" rx="292" ry="52" fill="none" stroke="url(#band)" stroke-width="16" clip-path="url(#near)" />
-        </svg>
-      </div>
     </section>
 
-    <section class="facts" aria-label="Коротко про сеанс">
+    <section class="ticket" aria-label="Коротко про сеанс">
       <p><b>64</b><span>місця під куполом</span></p>
       <p><b>50</b><span>хвилин триває показ</span></p>
       <p><b>18:00</b><span>перший сеанс</span></p>
+      <p><b>4</b><span>покази за вечір</span></p>
     </section>
 
     <section id="nebo" class="sky">
       <div class="sky-copy">
         <p class="eyebrow">01 — Небо</p>
-        <h2>Одне й те саме крісло. Три різні вечори.</h2>
-        <p>Натисніть небо — зміниться купол і перший рядок програми. Це показ, не розклад живої каси.</p>
+        <h2>Те саме крісло. Три різні вечори.</h2>
+        <p>Колір зали змінюється разом із небом. Перший показ у програмі теж.</p>
       </div>
       <div class="sky-switch" role="group" aria-label="Обрати небо">
-        <button type="button" data-sky="lito" aria-pressed="true">Літо<small>тепле, низьке</small></button>
-        <button type="button" data-sky="zyma" aria-pressed="false">Зима<small>ясне, високе</small></button>
-        <button type="button" data-sky="more" aria-pressed="false">Море<small>темне, солоне</small></button>
+        <button type="button" data-sky="lito" aria-pressed="true">
+          <span class="sky-preview" aria-hidden="true"></span>
+          <span class="sky-name">Літо<small>тепле, низьке</small></span>
+        </button>
+        <button type="button" data-sky="zyma" aria-pressed="false">
+          <span class="sky-preview" aria-hidden="true"></span>
+          <span class="sky-name">Зима<small>ясне, високе</small></span>
+        </button>
+        <button type="button" data-sky="more" aria-pressed="false">
+          <span class="sky-preview" aria-hidden="true"></span>
+          <span class="sky-name">Море<small>темне, солоне</small></span>
+        </button>
       </div>
     </section>
 
@@ -99,29 +84,82 @@
       </div>
       <div class="reel" id="reel" tabindex="0">
         <article id="first-show">
-          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M18 62 L48 28 L78 48 L120 18 L142 40" /></svg>
           <b>01</b>
+          <svg data-art="lito" viewBox="0 0 200 150" aria-hidden="true">
+            <defs>
+              <radialGradient id="moon" cx="34%" cy="32%">
+                <stop offset="0%" stop-color="#fff8ee" />
+                <stop offset="42%" stop-color="#e7d3b4" />
+                <stop offset="100%" stop-color="#8d7a62" />
+              </radialGradient>
+            </defs>
+            <circle cx="100" cy="74" r="48" fill="url(#moon)" />
+            <circle cx="82" cy="62" r="11" fill="rgba(70,52,36,.28)" />
+            <circle cx="116" cy="84" r="8" fill="rgba(70,52,36,.22)" />
+            <circle cx="98" cy="98" r="4" fill="rgba(70,52,36,.2)" />
+            <path d="M100 26 A48 48 0 0 1 148 74 A48 48 0 0 1 100 122" fill="rgba(12,10,16,.38)" />
+          </svg>
+          <svg data-art="zyma" viewBox="0 0 200 150" hidden aria-hidden="true">
+            <path d="M24 132 C48 28 62 36 78 132" fill="none" stroke="#9dffc2" stroke-width="10" stroke-linecap="round" opacity=".75" />
+            <path d="M64 132 C96 12 128 24 150 132" fill="none" stroke="#e9fff2" stroke-width="16" stroke-linecap="round" opacity=".45" />
+            <path d="M132 132 C156 48 176 52 190 132" fill="none" stroke="#5dffa6" stroke-width="8" stroke-linecap="round" opacity=".7" />
+          </svg>
+          <svg data-art="more" viewBox="0 0 200 150" hidden aria-hidden="true">
+            <circle cx="146" cy="42" r="14" fill="#f4fff9" />
+            <path d="M0 96 C40 78 70 112 110 96 C150 80 170 112 200 98 V150 H0 Z" fill="rgba(18,90,96,.55)" />
+            <path d="M0 102 C36 86 74 116 116 100 C154 86 176 112 200 104" fill="none" stroke="#9ff3e2" stroke-width="1.5" opacity=".8" />
+          </svg>
           <p>18:00</p>
           <h3>Місяць зблизька</h3>
           <span>Кратери, яких із двору не видно.</span>
         </article>
         <article>
-          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M24 58 C50 20 110 20 136 58" /><circle cx="80" cy="46" r="8" /></svg>
           <b>02</b>
+          <svg viewBox="0 0 200 150" aria-hidden="true">
+            <defs>
+              <radialGradient id="satbody" cx="36%" cy="30%">
+                <stop offset="0%" stop-color="#fff1dc" />
+                <stop offset="46%" stop-color="#e39a55" />
+                <stop offset="100%" stop-color="#6a3d78" />
+              </radialGradient>
+              <clipPath id="satfront"><rect x="0" y="78" width="200" height="72" /></clipPath>
+            </defs>
+            <ellipse cx="100" cy="78" rx="78" ry="16" fill="none" stroke="rgba(255,214,170,.4)" stroke-width="8" />
+            <circle cx="100" cy="74" r="28" fill="url(#satbody)" />
+            <ellipse cx="100" cy="78" rx="78" ry="16" fill="none" stroke="rgba(255,228,196,.95)" stroke-width="8" clip-path="url(#satfront)" />
+          </svg>
           <p>19:30</p>
           <h3>Кільця Сатурна</h3>
-          <span>Сорок хвилин без міського світла.</span>
+          <span>Кільця на всю ширину купола.</span>
         </article>
         <article>
-          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M16 70 L40 40 L62 52 L90 22 L112 36 L146 16" /></svg>
           <b>03</b>
+          <svg viewBox="0 0 200 150" aria-hidden="true">
+            <ellipse cx="108" cy="70" rx="78" ry="22" fill="rgba(255,214,170,.16)" transform="rotate(-24 108 70)" />
+            <g fill="#fff8ea">
+              <circle cx="28" cy="96" r="1.4" /><circle cx="46" cy="78" r="2" /><circle cx="62" cy="88" r="1.2" />
+              <circle cx="84" cy="70" r="2.2" /><circle cx="104" cy="60" r="1.5" /><circle cx="122" cy="48" r="2.4" />
+              <circle cx="146" cy="42" r="1.3" /><circle cx="168" cy="34" r="2" /><circle cx="186" cy="30" r="1.2" />
+              <circle cx="70" cy="54" r="1" /><circle cx="132" cy="78" r="1.1" /><circle cx="96" cy="40" r="1.6" />
+            </g>
+          </svg>
           <p>21:00</p>
           <h3>Чумацький Шлях</h3>
           <span>Як його видно далеко від Києва.</span>
         </article>
         <article>
-          <svg viewBox="0 0 160 90" aria-hidden="true"><path d="M30 24 L30 66 M30 45 H130 M130 24 L130 66" /></svg>
           <b>04</b>
+          <svg viewBox="0 0 200 150" aria-hidden="true">
+            <path d="M36 96 L62 58 L100 86 L142 40 L176 70" fill="none" stroke="rgba(255,214,170,.45)" stroke-width="1" />
+            <g fill="#fff6e8">
+              <circle cx="36" cy="96" r="3" /><circle cx="62" cy="58" r="2.2" /><circle cx="100" cy="86" r="3.2" />
+              <circle cx="142" cy="40" r="2.4" /><circle cx="176" cy="70" r="3" />
+            </g>
+            <g fill="rgba(255,246,232,.45)">
+              <circle cx="24" cy="40" r="1.2" /><circle cx="120" cy="112" r="1.3" /><circle cx="168" cy="108" r="1" />
+              <circle cx="88" cy="36" r="1.1" /><circle cx="54" cy="120" r="1" />
+            </g>
+          </svg>
           <p>22:30</p>
           <h3>Нічний атлас</h3>
           <span>Тихий сеанс, майже без дикторського тексту.</span>
@@ -133,7 +171,7 @@
       <div class="hall-copy">
         <p class="eyebrow">03 — Зала</p>
         <h2>Сідайте там, де видно весь купол.</h2>
-        <p>Світлі місця вільні. Порожні контури вже зайняті в цьому макеті. Обране місце само з’явиться в заявці.</p>
+        <p>Світле крісло вільне. Контур — місце, яке в цьому макеті вже зайняте. Обране саме з’явиться в заявці.</p>
         <dl class="pick">
           <div><dt>Місце</dt><dd id="seat-label">ще не обране</dd></div>
           <div><dt>Сеанс</dt><dd>50 хвилин</dd></div>

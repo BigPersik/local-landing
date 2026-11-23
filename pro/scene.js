@@ -1,13 +1,10 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
-import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
-import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 
 const canvas = document.querySelector("#view");
-const loader = document.querySelector("#loader");
+const loaderEl = document.querySelector("#loader");
 const countEl = document.querySelector("#count");
+const nowEl = document.querySelector("#now");
 const narrow = window.matchMedia("(max-width: 800px)").matches;
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -16,99 +13,65 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
   powerPreference: "high-performance",
 });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, narrow ? 1.25 : 1.6));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, narrow ? 1.3 : 1.6));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.08;
-renderer.setClearColor(0x0c1014, 1);
+renderer.toneMappingExposure = 1.05;
+renderer.setClearColor(0x090b0e, 1);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0c1014);
-scene.fog = new THREE.FogExp2(0x0c1014, narrow ? 0.07 : 0.05);
+scene.background = new THREE.Color(0x090b0e);
+scene.fog = new THREE.Fog(0x090b0e, 8, 18);
 const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.06).texture;
 
-const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
+const camera = new THREE.PerspectiveCamera(narrow ? 42 : 34, 1, 0.1, 40);
 const clock = new THREE.Clock();
 
-scene.add(new THREE.AmbientLight(0xb7c6d8, 0.35));
-const key = new THREE.DirectionalLight(0xfff6ec, 2.6);
-key.position.set(5, 7, 4);
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+const key = new THREE.DirectionalLight(0xfff8f0, 2.2);
+key.position.set(2, 4, 6);
 scene.add(key);
-const rim = new THREE.DirectionalLight(0x7eb0ff, 1.8);
-rim.position.set(-6, 3, -4);
-scene.add(rim);
+const fill = new THREE.DirectionalLight(0x9eb4d4, 0.6);
+fill.position.set(-4, 2, 3);
+scene.add(fill);
 
-function ribbonGeometry(curve, segments, width, thick) {
-  const frames = curve.computeFrenetFrames(segments, false);
-  const positions = [];
-  const indices = [];
-  let side = new THREE.Vector3().crossVectors(frames.tangents[0], new THREE.Vector3(0, 1, 0));
-  if (side.lengthSq() < 1e-6) side.crossVectors(frames.tangents[0], new THREE.Vector3(1, 0, 0));
-  side.normalize();
-  for (let i = 0; i <= segments; i += 1) {
-    const t = i / segments;
-    const point = curve.getPointAt(t);
-    const tangent = frames.tangents[i];
-    side.addScaledVector(tangent, -side.dot(tangent)).normalize();
-    side.applyAxisAngle(tangent, 0.01);
-    const face = new THREE.Vector3().crossVectors(tangent, side).normalize();
-    const half = width * (0.82 + Math.sin(t * Math.PI) * 0.18);
-    [[1, 1], [-1, 1], [-1, -1], [1, -1]].forEach(([along, across]) => {
-      positions.push(
-        point.x + side.x * half * along + face.x * thick * across,
-        point.y + side.y * half * along + face.y * thick * across,
-        point.z + side.z * half * along + face.z * thick * across,
-      );
-    });
-    if (i === segments) continue;
-    const a = i * 4;
-    const b = a + 4;
-    for (let edge = 0; edge < 4; edge += 1) {
-      const n = (edge + 1) % 4;
-      indices.push(a + edge, b + edge, a + n, b + edge, b + n, a + n);
-    }
-  }
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-  geometry.setIndex(indices);
-  geometry.computeVertexNormals();
-  return geometry;
-}
+const works = [
+  { name: "Цех 48", line: "Нічний сервіс", file: "../assets/hero-garage.jpg" },
+  { name: "Тиха", line: "Денна зала", file: "../assets/cafe-hero.jpg" },
+  { name: "Норд", line: "Дім предметів", file: "../assets/oak-wood.jpg" },
+];
 
-const arc = [];
-for (let i = 0; i <= 14; i += 1) {
-  const angle = -0.55 + (i / 14) * Math.PI * 1.65;
-  arc.push(new THREE.Vector3(
-    Math.cos(angle) * 1.65,
-    1.45 + Math.sin(angle) * 1.2,
-    Math.sin(angle * 1.35) * 0.48,
-  ));
-}
-const path = new THREE.CatmullRomCurve3(arc, false, "catmullrom", 0.2);
+const loader = new THREE.TextureLoader();
+const boards = [];
+const gap = narrow ? 2.15 : 3.35;
+const side = new THREE.MeshStandardMaterial({ color: 0x1c2128, metalness: 0.45, roughness: 0.4 });
 
-const metal = new THREE.MeshPhysicalMaterial({
-  color: 0xd5dbe3,
-  metalness: 1,
-  roughness: 0.18,
-  clearcoat: 0.65,
-  clearcoatRoughness: 0.12,
-  envMapIntensity: 1.15,
+works.forEach((work, index) => {
+  const texture = loader.load(work.file);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const group = new THREE.Group();
+  const print = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.7, 1.7),
+    new THREE.MeshStandardMaterial({ map: texture, roughness: 0.72, metalness: 0.02 }),
+  );
+  print.position.z = 0.045;
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(2.78, 1.78, 0.08), side);
+  group.add(slab, print);
+  group.position.set((index - 1) * gap, 0.05, index === 1 ? 0.15 : -0.35);
+  group.rotation.y = (index - 1) * -0.18;
+  scene.add(group);
+  boards.push(group);
 });
-const band = new THREE.Mesh(ribbonGeometry(path, narrow ? 90 : 160, 0.42, 0.055), metal);
-scene.add(band);
 
 const floor = new THREE.Mesh(
-  new THREE.CircleGeometry(18, 72),
-  new THREE.MeshStandardMaterial({ color: 0x12161c, metalness: 0.08, roughness: 0.92 }),
+  new THREE.CircleGeometry(12, 48),
+  new THREE.MeshStandardMaterial({ color: 0x101318, roughness: 0.95, metalness: 0.05 }),
 );
 floor.rotation.x = -Math.PI / 2;
+floor.position.y = -1.05;
 scene.add(floor);
-
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-composer.addPass(new UnrealBloomPass(new THREE.Vector2(1, 1), 0.06, 0.3, 0.94));
-composer.addPass(new OutputPass());
 
 const pointer = { x: 0, y: 0 };
 let progress = 0;
@@ -118,7 +81,7 @@ window.addEventListener("pointermove", (event) => {
   pointer.y = event.clientY / window.innerHeight - 0.5;
 });
 window.addEventListener("wheel", (event) => {
-  target = Math.min(1, Math.max(0, target + event.deltaY * 0.0009));
+  target = Math.min(1, Math.max(0, target + event.deltaY * 0.0007));
 }, { passive: true });
 let touchY = 0;
 window.addEventListener("touchstart", (event) => {
@@ -126,7 +89,7 @@ window.addEventListener("touchstart", (event) => {
 }, { passive: true });
 window.addEventListener("touchmove", (event) => {
   const y = event.touches[0].clientY;
-  target = Math.min(1, Math.max(0, target + (touchY - y) * 0.003));
+  target = Math.min(1, Math.max(0, target + (touchY - y) * 0.0025));
   touchY = y;
 }, { passive: true });
 
@@ -136,32 +99,37 @@ function resize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
-  composer.setSize(width, height);
 }
 
 let shown = 0;
 function frame() {
   const time = clock.getElapsedTime();
-  progress += (target - progress) * 0.06;
-  document.body.classList.toggle("is-open", progress > 0.4);
+  progress += (target - progress) * 0.07;
+  const focus = Math.min(2, Math.floor(progress * 2.99));
+  nowEl.textContent = works[focus].name;
+  nowEl.dataset.line = works[focus].line;
+  document.body.classList.toggle("is-open", progress > 0.72);
 
-  const intro = reduce ? 1 : Math.min(1, time / 2.2);
+  const intro = reduce ? 1 : Math.min(1, time / 1.6);
   const ease = 1 - (1 - intro) ** 3;
-  const radius = THREE.MathUtils.lerp(9.5, 6.1, ease);
-  const orbit = (reduce ? 0.4 : time * 0.12) + pointer.x * 1.1;
+  const lookX = (progress * 2) * gap - gap;
   camera.position.set(
-    Math.sin(orbit) * radius,
-    1.55 + pointer.y * -0.45 + (1 - ease) * 1.2,
-    Math.cos(orbit) * radius,
+    lookX + pointer.x * 0.45,
+    0.15 + pointer.y * -0.25,
+    THREE.MathUtils.lerp(6.4, narrow ? 4.4 : 4.8, ease),
   );
-  camera.lookAt(0, 1.45, 0);
-  band.rotation.y = progress * 0.35;
+  camera.lookAt(lookX, 0.05, 0);
 
-  composer.render();
+  boards.forEach((board, index) => {
+    const active = index === focus ? 1 : 0;
+    board.position.z += ((index === 1 ? 0.15 : -0.35) + active * 0.45 - board.position.z) * 0.08;
+  });
+
+  renderer.render(scene, camera);
   if (shown < 100) {
-    shown = Math.min(100, shown + 5);
+    shown = Math.min(100, shown + 6);
     countEl.textContent = String(shown).padStart(3, "0");
-    if (shown === 100) loader.classList.add("is-off");
+    if (shown === 100) loaderEl.classList.add("is-off");
   }
   requestAnimationFrame(frame);
 }

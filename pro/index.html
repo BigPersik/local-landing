@@ -3,148 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Сторінка, яка веде до справи</title>
-  <meta name="description" content="Форма збирає вітрини, сайти послуг і сезонні кампанії. Кадр, рух і текст в одній сторінці.">
+  <title>Форма — інтерактивні сторінки</title>
+  <meta name="description" content="Форма збирає сторінки з об’ємом: кадр, світло і рух.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
-  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
-  <a class="skip" href="#robota">До роботи</a>
-  <header class="top">
-    <a class="brand" href="#top">Форма</a>
-    <nav class="nav" id="nav">
-      <a href="#robota">Робота</a>
-      <a href="#zrazky">Кадри</a>
-      <a href="#cina">Ціна</a>
-      <a href="https://freelancehunt.com/freelancer/Big_Persik.html" target="_blank" rel="noopener">Профіль</a>
-    </nav>
-    <button class="menu" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
-  </header>
-
-  <main id="top">
-    <section class="intro">
-      <div class="intro-sticky">
-        <figure class="hero-photo">
-          <img src="../assets/hero-garage.jpg" alt="">
-        </figure>
-        <div class="intro-copy">
-          <p class="kicker">Студія сторінок</p>
-          <h1>
-            <span><i>Сторінка,</i></span>
-            <span><i>яка веде</i></span>
-            <span><i>до справи.</i></span>
-          </h1>
-          <p class="lead">Вітрина, дім послуги і кампанія на сезон. Кадр, рух і текст зібрані в одну річ.</p>
-          <div class="hero-actions">
-            <a class="btn" href="#zrazky">Дивитись кадри</a>
-            <a class="btn btn-line" href="#robota">Що в роботі</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="rail-wrap" id="robota">
-      <div class="rail-sticky">
-        <div class="rail" id="rail">
-          <article>
-            <img src="../assets/brake-detail.jpg" alt="Крупний кадр металу й світла в майстерні">
-            <div>
-              <p>01</p>
-              <h2>Лендінг</h2>
-              <p class="body">Одна сторінка. Послуга, наступний крок і форма. Людина з телефона не шукає, куди натиснути.</p>
-            </div>
-          </article>
-          <article>
-            <img src="../assets/cafe-cup.jpg" alt="Крупний кадр чашки на дерев’яному столі">
-            <div>
-              <p>02</p>
-              <h2>Сайт послуги</h2>
-              <p class="body">Кілька екранів, коли однієї сторінки мало: що входить у роботу, як доїхати, кого покликати.</p>
-            </div>
-          </article>
-          <article>
-            <img src="../assets/steel-dark.jpg" alt="Темна металева поверхня зі світлом по краю">
-            <div>
-              <p>03</p>
-              <h2>Кампанія</h2>
-              <p class="body">Сторінка на один сезон. Один предмет, один жест, жодного зайвого блоку.</p>
-            </div>
-          </article>
-          <article>
-            <img src="../assets/oak-wood.jpg" alt="Фактура дуба великим планом">
-            <div>
-              <p>04</p>
-              <h2>Ательє</h2>
-              <p class="body">Дім предметів: матеріал, тиша і колекція, яку гортають повільно.</p>
-              <a class="text-link" href="../nord/">Відкрити Норд</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="scenes" id="zrazky">
-      <article class="scene">
-        <img src="../assets/hero-garage.jpg" alt="Автомобіль на підйомнику в темній майстерні">
-        <div class="scene-copy">
-          <p class="kicker">Ніч · сервіс</p>
-          <h2>Цех 48</h2>
-          <p>Нічний сервіс. Ціна стоїть до запису. Сторінка тримає темряву, а не шум прайса.</p>
-          <a class="btn" href="../">Відкрити кадр</a>
-        </div>
-      </article>
-      <article class="scene">
-        <img src="../assets/cafe-hero.jpg" alt="Кав’ярня вдень: чашка, пара і світло з вікна">
-        <div class="scene-copy">
-          <p class="kicker">День · зала</p>
-          <h2>Тиха</h2>
-          <p>Денна зала. Коротке меню, тепле світло, стіл на конкретну годину.</p>
-          <a class="btn" href="../kaviarnya/">Відкрити кадр</a>
-        </div>
-      </article>
-      <article class="scene scene-nord">
-        <img src="../assets/oak-wood.jpg" alt="Дубова поверхня, тепле бокове світло">
-        <div class="scene-copy">
-          <p class="kicker">Сезон · ательє</p>
-          <h2>Норд</h2>
-          <p>Дім предметів. Дуб, метал і папір. Колекція, якій вистачає однієї повільної сторінки.</p>
-          <a class="btn" href="../nord/">Відкрити дім</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="price" id="cina">
-      <p class="kicker">Тариф</p>
-      <h2>Обсяг називаю в запиті.</h2>
-      <div class="rates">
-        <div>
-          <span>Дизайн сайту</span>
-          <strong>8&nbsp;000</strong>
-          <em>грн за проєкт</em>
-        </div>
-        <div>
-          <span>Сайт під ключ</span>
-          <strong>15&nbsp;000</strong>
-          <em>грн за проєкт</em>
-        </div>
-      </div>
-    </section>
-
-    <section class="close">
-      <p class="kicker">Зв’язок</p>
-      <h2>Запит.</h2>
-      <p>Профіль відкритий. Далі говоримо про кадр, обсяг і термін.</p>
-      <a class="big" href="https://freelancehunt.com/freelancer/Big_Persik.html" target="_blank" rel="noopener">Відкрити профіль</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>Форма. Вибрані сторінки.</p>
-    <p><a href="../">Цех 48</a> · <a href="../kaviarnya/">Тиха</a> · <a href="../nord/">Норд</a></p>
-  </footer>
-  <script src="main.js"></script>
+  <canvas id="view"></canvas>
+  <div class="loader" id="loader"><b id="count">000</b></div>
+  <div class="hud">
+    <header class="mark">
+      <a href="#top">Форма</a>
+      <p>Студія сторінок</p>
+    </header>
+    <aside class="note" id="note">
+      <p class="kicker">// кадр</p>
+      <p class="line">Сторінка має стояти в просторі. Кадр, світло і пауза — одна річ.</p>
+    </aside>
+    <aside class="works" id="works">
+      <p class="kicker">// вибране</p>
+      <a href="../">Цех 48<span>Нічний сервіс</span></a>
+      <a href="../kaviarnya/">Тиха<span>Денна зала</span></a>
+      <a href="../nord/">Норд<span>Дім предметів</span></a>
+      <p class="rate">Дизайн 8&nbsp;000 грн<br>Під ключ 15&nbsp;000 грн</p>
+      <a class="profile" href="https://freelancehunt.com/freelancer/Big_Persik.html" target="_blank" rel="noopener">Написати в профіль</a>
+    </aside>
+    <p class="hint" id="hint">Гортай, щоб увійти</p>
+  </div>
+  <script type="module" src="scene.js"></script>
 </body>
 </html>

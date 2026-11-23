@@ -7,14 +7,14 @@
   <meta name="description" content="Лендінги і невеликі сайти послуг. Два демонстраційні зразки, ціни з профілю, без вигаданих відгуків.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
   <a class="skip" href="#robota">До роботи</a>
   <header class="top">
-    <a class="brand" href="#top">ЗРАЗОК<span>01</span></a>
+    <a class="brand" href="#top">Зразок</a>
     <nav class="nav" id="nav">
       <a href="#robota">Робота</a>
       <a href="#zrazky">Кадри</a>
@@ -25,126 +25,101 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="kicker"><span class="led"></span> система на зв’язку · <time id="clock">--:--:--</time></p>
-        <h1>Сторінка,<br>яка веде<br>до <em id="swap"><span>справи</span><i class="caret">_</i></em></h1>
-        <p class="lead">Лендінг або невеликий сайт послуги. Без вигаданих років досвіду і без чужих відгуків.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#zrazky">Дивитись кадри</a>
-          <a class="btn btn-line" href="#robota">Що в роботі</a>
+    <section class="intro">
+      <div class="intro-sticky">
+        <figure class="hero-photo">
+          <img src="../assets/hero-garage.jpg" alt="">
+        </figure>
+        <div class="intro-copy">
+          <p class="kicker">Одна людина · не агенція</p>
+          <h1>
+            <span><i>Сторінка,</i></span>
+            <span><i>яка веде</i></span>
+            <span><i>до справи.</i></span>
+          </h1>
+          <p class="lead">Лендінг або невеликий сайт послуги. Без вигаданих років досвіду і без чужих відгуків.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#zrazky">Дивитись кадри</a>
+            <a class="btn btn-line" href="#robota">Що в роботі</a>
+          </div>
         </div>
       </div>
-      <aside class="panel" aria-label="Стан системи">
-        <div class="panel-row">
-          <span>статус</span>
-          <strong>беру задачу</strong>
+    </section>
+
+    <section class="rail-wrap" id="robota">
+      <div class="rail-sticky">
+        <div class="rail" id="rail">
+          <article>
+            <img src="../assets/brake-detail.jpg" alt="Крупний кадр металу й світла в майстерні">
+            <div>
+              <p>01</p>
+              <h2>Лендінг</h2>
+              <p class="body">Одна сторінка. Послуга, наступний крок і форма. Людина з телефона не шукає, куди натиснути.</p>
+            </div>
+          </article>
+          <article>
+            <img src="../assets/cafe-cup.jpg" alt="Крупний кадр чашки на дерев’яному столі">
+            <div>
+              <p>02</p>
+              <h2>Сайт послуги</h2>
+              <p class="body">Кілька екранів, коли однієї сторінки мало: що входить у роботу, як доїхати, кого покликати.</p>
+            </div>
+          </article>
+          <article class="rail-last">
+            <div>
+              <p>03</p>
+              <h2>WordPress</h2>
+              <p class="body">Легка своя тема. Якщо вистачає простого сайту, не збираю важкий конструктор.</p>
+              <p class="body limit">Великий магазин на сотні товарів не беру.</p>
+            </div>
+          </article>
         </div>
-        <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <dl>
-          <div><dt>формат</dt><dd>лендінг / послуга</dd></div>
-          <div><dt>курсор</dt><dd id="coord">X — · Y —</dd></div>
-          <div><dt>зразки</dt><dd>02 · вигадані</dd></div>
-          <div><dt>відгуки</dt><dd>00</dd></div>
-        </dl>
-      </aside>
-    </section>
-
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>лендінг</span><span>сайт послуги</span><span>wordpress</span><span>адаптив</span><span>форма на екрані</span><span>без вигаданих відгуків</span>
-        <span>лендінг</span><span>сайт послуги</span><span>wordpress</span><span>адаптив</span><span>форма на екрані</span><span>без вигаданих відгуків</span>
-      </div>
-    </div>
-
-    <section id="robota" class="sheet">
-      <div class="sheet-head">
-        <p class="eyebrow">01 — робота</p>
-        <h2>Три формати. Решту не роздуваю.</h2>
-      </div>
-      <ol class="formats">
-        <li>
-          <span>01</span>
-          <div>
-            <h3>Лендінг</h3>
-            <p>Одна сторінка. Послуга, наступний крок і форма. Людина з телефона не шукає, куди натиснути.</p>
-          </div>
-        </li>
-        <li>
-          <span>02</span>
-          <div>
-            <h3>Сайт послуги</h3>
-            <p>Кілька екранів, коли однієї сторінки мало: що входить у роботу, як доїхати, кого покликати.</p>
-          </div>
-        </li>
-        <li>
-          <span>03</span>
-          <div>
-            <h3>WordPress</h3>
-            <p>Легка своя тема. Якщо вистачає простого сайту, не збираю важкий конструктор.</p>
-          </div>
-        </li>
-      </ol>
-      <p class="aside">Великий магазин на сотні товарів не беру.</p>
-    </section>
-
-    <section id="zrazky" class="sheet">
-      <div class="sheet-head">
-        <p class="eyebrow">02 — кадри</p>
-        <h2>Два заклади, яких немає.</h2>
-        <p>Кадр живий, адреса вигадана. Форма нікуди не відправляє дані.</p>
-      </div>
-      <div class="shots">
-        <article class="shot">
-          <a href="../">
-            <img src="../assets/hero-garage.jpg" alt="Темний кадр автосервісу: машина на підйомнику">
-            <span class="scan" aria-hidden="true"></span>
-            <span class="tag">CAM 01 · ніч</span>
-          </a>
-          <div class="shot-copy">
-            <h3>Цех 48</h3>
-            <p>Автосервіс. Ціни видно до запису. Заявка лишається на екрані.</p>
-            <a href="../">Відкрити</a>
-          </div>
-        </article>
-        <article class="shot">
-          <a href="../kaviarnya/">
-            <img src="../assets/cafe-hero.jpg" alt="Теплий кадр кав’ярні: чашка на стійці">
-            <span class="scan" aria-hidden="true"></span>
-            <span class="tag">CAM 02 · день</span>
-          </a>
-          <div class="shot-copy">
-            <h3>Тиха</h3>
-            <p>Кав’ярня. Меню і столик. Ця форма столик не бронює.</p>
-            <a href="../kaviarnya/">Відкрити</a>
-          </div>
-        </article>
       </div>
     </section>
 
-    <section id="cina" class="sheet">
-      <div class="sheet-head">
-        <p class="eyebrow">03 — ціна</p>
-        <h2>Цифри з профілю.</h2>
-        <p>На конкретну задачу суму і термін пишу в ставці, коли бачу обсяг.</p>
-      </div>
-      <dl class="rates">
+    <section class="scenes" id="zrazky">
+      <article class="scene">
+        <img src="../assets/hero-garage.jpg" alt="Автомобіль на підйомнику в темній майстерні">
+        <div class="scene-copy">
+          <p class="kicker">Зразок · вигаданий заклад</p>
+          <h2>Цех 48</h2>
+          <p>Автосервіс. Ціни видно до запису. Заявка лишається на екрані і нікому не надсилається.</p>
+          <a class="btn" href="../">Відкрити кадр</a>
+        </div>
+      </article>
+      <article class="scene">
+        <img src="../assets/cafe-hero.jpg" alt="Кав’ярня вдень: чашка, пара і світло з вікна">
+        <div class="scene-copy">
+          <p class="kicker">Зразок · вигаданий заклад</p>
+          <h2>Тиха</h2>
+          <p>Кав’ярня. Меню і столик. Ця форма столик не бронює.</p>
+          <a class="btn" href="../kaviarnya/">Відкрити кадр</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="price" id="cina">
+      <p class="kicker">Ціна з профілю</p>
+      <h2>Суму на задачу пишу в ставці.</h2>
+      <div class="rates">
         <div>
-          <dt>Дизайн сайту</dt>
-          <dd>8&nbsp;000 <span>грн / проєкт</span></dd>
+          <span>Дизайн сайту</span>
+          <strong>8&nbsp;000</strong>
+          <em>грн за проєкт</em>
         </div>
         <div>
-          <dt>Сайт під ключ</dt>
-          <dd>15&nbsp;000 <span>грн / проєкт</span></dd>
+          <span>Сайт під ключ</span>
+          <strong>15&nbsp;000</strong>
+          <em>грн за проєкт</em>
         </div>
-      </dl>
+      </div>
     </section>
 
     <section class="close">
-      <p class="eyebrow">04 — зв’язок</p>
+      <p class="kicker">Зв’язок</p>
       <h2>Написати в профіль.</h2>
       <p>Телефона й пошти на цій сторінці немає.</p>
-      <a class="big-link" href="https://freelancehunt.com/freelancer/Big_Persik.html" target="_blank" rel="noopener">Відкрити профіль</a>
+      <a class="big" href="https://freelancehunt.com/freelancer/Big_Persik.html" target="_blank" rel="noopener">Відкрити профіль</a>
     </section>
   </main>
 
